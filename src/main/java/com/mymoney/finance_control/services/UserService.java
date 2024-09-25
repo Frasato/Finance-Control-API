@@ -1,6 +1,7 @@
 package com.mymoney.finance_control.services;
 
 import com.mymoney.finance_control.models.UserModel;
+import com.mymoney.finance_control.repositories.MoneyRepository;
 import com.mymoney.finance_control.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,6 +14,9 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private MoneyRepository moneyRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
