@@ -24,9 +24,12 @@ public class UserController {
 
         user.setUsername(userDto.getUsername());
         user.setPassword(userDto.getPassword());
-
-        userService.registerUser(user);
-        return ResponseEntity.status(200).body("User registered");
+        try{
+            userService.registerUser(user);
+            return ResponseEntity.status(200).body(user);
+        }catch (Exception exception){
+            return ResponseEntity.status(400).body("Error registering user: " + exception);
+        }
     }
 
     @PostMapping("/login")
