@@ -15,15 +15,13 @@ public class SecurityConfig {
         httpSecurity
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/register", "login")
+                        .requestMatchers("/register", "/login")
                         .permitAll()
                         .anyRequest().authenticated()
                 )
-                .oauth2Login(oauth2 ->
-                        oauth2.loginPage("/oauth2/authorization"))
-                .formLogin(form ->
-                        form.loginPage("login")
-                                .defaultSuccessUrl("/home", true)
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/home", true)
                 );
 
         return httpSecurity.build();
