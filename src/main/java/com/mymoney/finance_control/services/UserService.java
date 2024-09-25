@@ -1,5 +1,6 @@
 package com.mymoney.finance_control.services;
 
+import com.mymoney.finance_control.models.MoneyModel;
 import com.mymoney.finance_control.models.UserModel;
 import com.mymoney.finance_control.repositories.MoneyRepository;
 import com.mymoney.finance_control.repositories.UserRepository;
@@ -50,5 +51,10 @@ public class UserService {
         }else{
             return false;
         }
+    }
+
+    public void addMoneyOnAccount(MoneyModel moneyModel, UserModel userModel){
+        moneyModel.setUserId(userModel);
+        moneyRepository.save(moneyModel);
     }
 }
