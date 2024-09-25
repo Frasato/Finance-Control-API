@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserService {
@@ -20,6 +21,10 @@ public class UserService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    public Optional<UserModel> findUserById(UUID id){
+        return userRepository.findById(id);
+    }
 
     public void registerUser(UserModel userModel){
 
