@@ -3,6 +3,8 @@ package com.mymoney.finance_control.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 @Entity
@@ -25,6 +27,9 @@ public class MoneyModel {
 
     @Column(name = "category")
     private String category;
+
+    @Column(name = "operation_date")
+    private String operationDate;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -89,5 +94,12 @@ public class MoneyModel {
 
     public void setUserId(UserModel userId) {
         this.userId = userId;
+    }
+
+    @PrePersist
+    public void setOperationDate(){
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(("dd/MM/yyyy HH:mm:ss"));
+        this.operationDate = now.format(formatter);
     }
 }
