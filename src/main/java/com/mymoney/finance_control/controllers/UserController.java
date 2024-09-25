@@ -1,6 +1,6 @@
 package com.mymoney.finance_control.controllers;
 
-import com.mymoney.finance_control.dtos.MoneyDto;
+import com.mymoney.finance_control.dtos.MoneyDtoIn;
 import com.mymoney.finance_control.dtos.UserDto;
 import com.mymoney.finance_control.models.MoneyModel;
 import com.mymoney.finance_control.models.UserModel;
@@ -49,28 +49,6 @@ public class UserController {
             return ResponseEntity.status(200).body(user);
         }else{
             return ResponseEntity.status(401).body("Invalid Credentials");
-        }
-    }
-
-    @PostMapping("/add/{userId}")
-    public ResponseEntity<?> addMoneyOnAccount(@PathVariable("userId")UUID userId, @RequestBody MoneyDto moneyDto){
-        Optional<UserModel> findedUser = userService.findUserById(userId);
-
-        MoneyModel money = new MoneyModel();
-
-        if(findedUser.isPresent()){
-            UserModel user = findedUser.get();
-
-            money.setMoneyOut(0.0);
-            money.setMoneyIn(moneyDto.getMoneyIn());
-            money.setForWhat(moneyDto.getForWhat());
-            money.setCategory(moneyDto.getCategory());
-            money.setUserId(user);
-
-            moneyService.saveMoneyIn(money);
-            return ResponseEntity.status(201).body(money);
-        }else{
-            return ResponseEntity.status(404).body("User not found to save a money!");
         }
     }
 
