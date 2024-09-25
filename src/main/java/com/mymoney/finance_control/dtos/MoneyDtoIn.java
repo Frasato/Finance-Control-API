@@ -1,19 +1,10 @@
 package com.mymoney.finance_control.dtos;
 
-public class MoneyDto {
+public class MoneyDtoIn {
 
-    private Double moneyOut;
     private Double moneyIn;
     private String forWhat;
     private String category;
-
-    public Double getMoneyOut() {
-        return moneyOut;
-    }
-
-    public void setMoneyOut(Double moneyOut) {
-        this.moneyOut = moneyOut;
-    }
 
     public Double getMoneyIn() {
         return moneyIn;
