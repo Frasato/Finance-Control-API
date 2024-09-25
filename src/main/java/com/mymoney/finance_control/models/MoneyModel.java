@@ -2,19 +2,11 @@ package com.mymoney.finance_control.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.UUID;
 
 @Entity
 @Table(name = "money_tb")
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
 public class MoneyModel {
 
     @Id
@@ -39,4 +31,63 @@ public class MoneyModel {
     @JsonBackReference
     private UserModel userId;
 
+    public MoneyModel() {
+    }
+
+    public MoneyModel(UUID moneyId, Double moneyOut, Double moneyIn, String forWhat, String category, UserModel userId) {
+        this.moneyId = moneyId;
+        this.moneyOut = moneyOut;
+        this.moneyIn = moneyIn;
+        this.forWhat = forWhat;
+        this.category = category;
+        this.userId = userId;
+    }
+
+    public UUID getMoneyId() {
+        return moneyId;
+    }
+
+    public void setMoneyId(UUID moneyId) {
+        this.moneyId = moneyId;
+    }
+
+    public Double getMoneyOut() {
+        return moneyOut;
+    }
+
+    public void setMoneyOut(Double moneyOut) {
+        this.moneyOut = moneyOut;
+    }
+
+    public Double getMoneyIn() {
+        return moneyIn;
+    }
+
+    public void setMoneyIn(Double moneyIn) {
+        this.moneyIn = moneyIn;
+    }
+
+    public String getForWhat() {
+        return forWhat;
+    }
+
+    public void setForWhat(String forWhat) {
+        this.forWhat = forWhat;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public UserModel getUserId() {
+        return userId;
+    }
+
+    public void setUserId(UserModel userId) {
+        this.userId = userId;
+    }
 }
