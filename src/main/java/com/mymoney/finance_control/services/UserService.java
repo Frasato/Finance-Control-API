@@ -52,9 +52,4 @@ public class UserService {
             return false;
         }
     }
-
-    public void addMoneyOnAccount(MoneyModel moneyModel, UserModel userModel){
-        moneyModel.setUserId(userModel);
-        moneyRepository.save(moneyModel);
-    }
 }
