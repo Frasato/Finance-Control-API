@@ -38,7 +38,7 @@ public class UserService {
         userRepository.save(userModel);
     }
 
-    public boolean validateUser(UserModel userModel){
+    public UserModel validateUser(UserModel userModel){
         Optional<UserModel> findedUser = userRepository
                 .findUserByUsername(userModel
                         .getUsername()
@@ -47,9 +47,10 @@ public class UserService {
                 );
 
         if(findedUser.isPresent()){
-            return passwordEncoder.matches(userModel.getPassword(), findedUser.get().getPassword());
+            passwordEncoder.matches(userModel.getPassword(), findedUser.get().getPassword());
+            return findedUser.get();
         }else{
-            return false;
+            return null;
         }
     }
 }
