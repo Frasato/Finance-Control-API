@@ -12,7 +12,7 @@ import java.util.UUID;
 @Repository
 public interface UserRepository extends JpaRepository<UserModel, UUID> {
 
-    @Query(value = "SELECT FROM user_tb WHERE username=:username", nativeQuery = true)
+    @Query(value = "SELECT * FROM user_tb WHERE username=:username", nativeQuery = true)
     Optional<UserModel> findUserByUsername(@Param("username") String username);
 
 }
