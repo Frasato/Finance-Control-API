@@ -45,8 +45,9 @@ public class UserController {
         user.setUsername(userDto.getUsername());
         user.setPassword(userDto.getPassword());
 
-        if(userService.validateUser(user)){
-            return ResponseEntity.status(200).body(user);
+        UserModel newUser = userService.validateUser(user);
+        if(newUser != null){
+            return ResponseEntity.status(200).body(newUser);
         }else{
             return ResponseEntity.status(401).body("Invalid Credentials");
         }
