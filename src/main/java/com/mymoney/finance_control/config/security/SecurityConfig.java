@@ -1,4 +1,4 @@
-package com.mymoney.finance_control.config;
+package com.mymoney.finance_control.config.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
