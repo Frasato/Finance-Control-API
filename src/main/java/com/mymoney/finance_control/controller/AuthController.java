@@ -5,7 +5,9 @@ import com.mymoney.finance_control.dtos.ResponseDto;
 import com.mymoney.finance_control.dtos.RegisterRequestDto;
 import com.mymoney.finance_control.models.User;
 import com.mymoney.finance_control.repositories.UserRepository;
+import com.mymoney.finance_control.services.MailService;
 import com.mymoney.finance_control.services.TokenService;
+import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Optional;
 
 @RestController
@@ -26,6 +29,8 @@ public class AuthController {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private TokenService tokenService;
+    @Autowired
+    private MailService mailService;
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequestDto loginRequestDto){
@@ -40,7 +45,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody RegisterRequestDto registerRequestDto){
+    public ResponseEntity<?> register(@RequestBody RegisterRequestDto registerRequestDto) throws MessagingException, UnsupportedEncodingException {
         Optional<User> findedUser = userRepository.findByEmail(registerRequestDto.email());
         User user = new User();
 
@@ -50,6 +55,8 @@ public class AuthController {
             user.setUsername(registerRequestDto.username());
 
             userRepository.save(user);
+            mailService.sendWelcomeMail(user);
+
             String token = tokenService.generateToken(user);
 
             return ResponseEntity.ok().body(new ResponseDto(user.getUsername(), token));
