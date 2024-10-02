@@ -21,4 +21,8 @@ public class RemoveMoneyService {
         removeMoneyRepository.save(removeMoney);
     }
 
+    public List<RemoveMoney> listAllByUserId(String id){
+        return removeMoneyRepository.findByUserId(id);
+    }
+
 }
