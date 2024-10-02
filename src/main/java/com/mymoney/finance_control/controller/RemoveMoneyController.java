@@ -32,6 +32,22 @@ public class RemoveMoneyController {
         return ResponseEntity.status(200).body(removeMoneyList);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> listByUser(@PathVariable("id") String id){
+        Optional<User> findedUser = userRepository.findById(id);
+
+        if(findedUser.isEmpty()){
+            return ResponseEntity.status(404).body("User not found or not authorized");
+        }
+
+        List<RemoveMoney> findedRemoveMoney = removeMoneyService.listAllByUserId(id);
+        if(findedRemoveMoney.isEmpty()){
+            return ResponseEntity.status(204).build();
+        }
+
+        return ResponseEntity.status(200).body(findedRemoveMoney);
+    }
+
     @PostMapping("/takeout")
     public ResponseEntity<?> removeMoney(@RequestBody RemoveRequestDto removeRequestDto){
         Optional<User> findedUser = userRepository.findById(removeRequestDto.id());
