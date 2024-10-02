@@ -32,6 +32,17 @@ public class AddMoneyController {
         return ResponseEntity.status(200).body(allEntries);
     }
 
+    @GetMapping("/user/{id}")
+    public ResponseEntity<?> listEntriesByUser(@PathVariable("id") String id){
+        List<AddMoney> allEntriesByUser = addMoneyService.listByUser(id);
+
+        if(allEntriesByUser.isEmpty()){
+            return ResponseEntity.status(204).build();
+        }
+
+        return ResponseEntity.status(200).body(allEntriesByUser);
+    }
+
     @PostMapping("/entries")
     public ResponseEntity<?> AddEntriesMoney(@RequestBody EntriesRequestDto entriesRequestDto){
         Optional<User> findedUser = userRepository.findById(entriesRequestDto.id());
