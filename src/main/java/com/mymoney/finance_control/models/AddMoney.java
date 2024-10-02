@@ -1,5 +1,6 @@
 package com.mymoney.finance_control.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.time.Instant;
@@ -17,14 +18,21 @@ public class AddMoney {
     private String context;
     private Instant addDate;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonBackReference
+    private User userAdd;
+
+
     public AddMoney() {
     }
 
-    public AddMoney(String id, Double value, String context, Instant addDate) {
+    public AddMoney(String id, Double value, String context, Instant addDate, User userAdd) {
         this.id = id;
         this.value = value;
         this.context = context;
         this.addDate = addDate;
+        this.userAdd = userAdd;
     }
 
     public String getId() {
@@ -57,6 +65,14 @@ public class AddMoney {
 
     public void setAddDate(Instant addDate) {
         this.addDate = addDate;
+    }
+
+    public User getUserAdd() {
+        return userAdd;
+    }
+
+    public void setUserAdd(User userAdd) {
+        this.userAdd = userAdd;
     }
 
     @PrePersist
