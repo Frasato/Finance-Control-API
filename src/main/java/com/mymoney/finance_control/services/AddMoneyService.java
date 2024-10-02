@@ -21,4 +21,8 @@ public class AddMoneyService {
         addMoneyRepository.save(addMoney);
     }
 
+    public List<AddMoney> listByUser(String id){
+        return addMoneyRepository.findByUserId(id);
+    }
+
 }
