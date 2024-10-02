@@ -17,4 +17,8 @@ public class RemoveMoneyService {
         return removeMoneyRepository.findAll();
     }
 
+    public void save(RemoveMoney removeMoney){
+        removeMoneyRepository.save(removeMoney);
+    }
+
 }
