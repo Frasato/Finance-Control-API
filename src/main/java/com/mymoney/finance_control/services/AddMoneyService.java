@@ -6,7 +6,4 @@ import org.springframework.stereotype.Service;
 @Service
 public class AddMoneyService {
 
-    @Autowired
-    private AddMoneyService addMoneyService;
-
 }
